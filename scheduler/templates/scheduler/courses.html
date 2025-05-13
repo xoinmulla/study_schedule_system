@@ -1,0 +1,38 @@
+{% extends 'scheduler/base.html' %}
+{% block title %}Courses{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2 class="fw-bold">📚 Your Courses</h2>
+  <a href="{% url 'add_course' %}" class="btn btn-success">+ Add Course</a>
+</div>
+
+<div class="row">
+  {% for course in courses %}
+  <div class="col-md-6 col-lg-4 mb-4">
+    <div class="card h-100 shadow-sm border-0 hover-zoom">
+      <div class="card-body">
+        <h5 class="card-title text-primary">{{ course.name }}</h5>
+        <p class="card-text mb-0"><strong>Credits:</strong> {{ course.credits }}</p>
+        <p class="text-muted mb-0"><small>Course ID: {{ course.id }}</small></p>
+      </div>
+    </div>
+  </div>
+  {% empty %}
+  <div class="col-12 text-center">
+    <img src="/static/images/empty-folder.png" alt="No courses" style="max-width: 200px;" class="mb-3">
+    <p class="text-muted">No courses available.</p>
+  </div>
+  {% endfor %}
+</div>
+
+<!-- Optional hover style -->
+<style>
+  .hover-zoom {
+    transition: transform 0.3s ease;
+  }
+  .hover-zoom:hover {
+    transform: translateY(-5px) scale(1.02);
+  }
+</style>
+{% endblock %}

@@ -1,0 +1,85 @@
+  {% extends 'scheduler/base.html' %}
+  {% block title %}Home{% endblock %}
+
+  {% block content %}
+  <!-- Hero Section -->
+  <section class="text-white d-flex align-items-center justify-content-center" style="background: url(https://i.pinimg.com/736x/76/59/0d/76590db5d6257ec7f8ca9d414423d0bf.jpg) center/cover no-repeat; min-height: 90vh;">
+  <div class="container text-center bg-dark bg-opacity-75 p-5 rounded-4 shadow-lg">
+    <h1 class="display-3 fw-bold mb-3">Welcome to <span class="text-primary">Study Schedule</span></h1>
+    <p class="lead mb-4">Streamline your academic journey with smart planning, seamless organization, and focused productivity.</p>
+    
+    {% if user.is_authenticated %}
+    <div class="d-flex flex-wrap justify-content-center gap-3 mt-4">
+      <a href="{% url 'courses' %}" class="btn btn-primary btn-lg px-4 py-2 shadow-sm">📘 View Courses</a>
+      <a href="{% url 'sessions' %}" class="btn btn-outline-light btn-lg px-4 py-2 shadow-sm">🕓 Study Sessions</a>
+      <a href="{% url 'tasks' %}" class="btn btn-success btn-lg px-4 py-2 shadow-sm">🗂️ Manage Tasks</a>
+    </div>
+    {% else %}
+    <div class="mt-4">
+      <a href="{% url 'login' %}" class="btn btn-warning btn-lg shadow-sm">
+        <i class="fas fa-sign-in-alt me-2"></i> Login to Access Dashboard
+      </a>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+  <!-- Features -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="fw-bold">Core Features</h2>
+        <p class="text-muted">Everything you need to stay organized and productive</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card h-100 text-center border-0 shadow-sm p-4 hover-zoom">
+            <i class="fas fa-book fa-3x text-primary mb-3"></i>
+            <h5 class="fw-semibold">Organize Courses</h5>
+            <p class="text-muted">Manage syllabi, notes, and schedules — all in one unified space.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 text-center border-0 shadow-sm p-4 hover-zoom">
+            <i class="fas fa-clock fa-3x text-warning mb-3"></i>
+            <h5 class="fw-semibold">Schedule Sessions</h5>
+            <p class="text-muted">Create structured study plans and never miss a beat.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 text-center border-0 shadow-sm p-4 hover-zoom">
+            <i class="fas fa-tasks fa-3x text-success mb-3"></i>
+            <h5 class="fw-semibold">Track Tasks</h5>
+            <p class="text-muted">Stay on top of assignments, deadlines, and personal to-dos effortlessly.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call To Action -->
+  <section class="py-5 text-white" style="background-color: #0d6efd;">
+  <div class="container text-center">
+    <h2 class="fw-bold mb-3">Ready to take control of your time?</h2>
+    <p class="mb-4">Build better habits, eliminate stress, and thrive academically with Study Schedule.</p>
+    
+    {% if user.is_authenticated %}
+      <a href="{% url 'courses' %}" class="btn btn-light btn-lg px-4 py-2">🚀 Get Started</a>
+    {% else %}
+      <a href="{% url 'login' %}" class="btn btn-outline-light btn-lg px-4 py-2">🔒 Login to Get Started</a>
+    {% endif %}
+  </div>
+</section>
+
+
+
+  <!-- Custom Animations -->
+  <style>
+    .hover-zoom {
+      transition: transform 0.3s ease;
+    }
+    .hover-zoom:hover {
+      transform: translateY(-5px) scale(1.02);
+    }
+  </style>
+  {% endblock %}

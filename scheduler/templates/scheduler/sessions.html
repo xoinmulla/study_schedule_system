@@ -1,0 +1,36 @@
+{% extends 'scheduler/base.html' %}
+{% block title %}Study Sessions{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2 class="fw-bold">🕓 Study Sessions</h2>
+  <a href="{% url 'add_session' %}" class="btn btn-primary">+ Add Session</a>
+</div>
+
+<div class="row">
+  {% for session in sessions %}
+  <div class="col-md-6 col-lg-4 mb-4">
+    <div class="card h-100 shadow-sm border-0 hover-zoom">
+      <div class="card-body">
+        <h5 class="card-title text-success">{{ session.course.name }}</h5>
+        <p class="card-text mb-1">
+          <i class="far fa-calendar-alt me-1 text-secondary"></i>
+          {{ session.session_date|date:"D, M j, Y" }}
+        </p>
+        <p class="card-text">
+          <i class="far fa-clock me-1 text-secondary"></i>
+          {{ session.start_time|time:"H:i" }} - {{ session.end_time|time:"H:i" }}
+        </p>
+        <a href="{% url 'edit_session' session.pk %}" class="btn btn-warning btn-sm">Edit</a>
+        <a href="{% url 'delete_session' session.pk %}" class="btn btn-danger btn-sm">Delete</a>
+      </div>
+    </div>
+  </div>
+  {% empty %}
+  <div class="col-12 text-center">
+    <img src="/static/images/empty-calendar.png" alt="No sessions" style="max-width: 200px;" class="mb-3">
+    <p class="text-muted">No study sessions scheduled yet.</p>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

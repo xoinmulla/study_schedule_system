@@ -1,0 +1,36 @@
+{% extends 'scheduler/base.html' %}
+
+{% block title %}Tasks{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2 class="fw-bold">✅ Task Manager</h2>
+  <a href="{% url 'add_task' %}" class="btn btn-primary">+ Add Task</a>
+</div>
+
+<div class="row">
+  {% for task in tasks %}
+  <div class="col-md-6 col-lg-4 mb-4">
+    <div class="card h-100 shadow-sm border-0 hover-zoom">
+      <div class="card-body">
+        <h5 class="card-title text-secondary">
+          {{ task.title }}
+        </h5>
+        <p class="card-text mb-2">
+          <i class="far fa-calendar-alt me-1 text-secondary"></i>
+          Due: {{ task.due_date|date:"D, M j, Y" }}
+        </p>
+        <a href="{% url 'edit_task' task.pk %}" class="btn btn-warning btn-sm">Edit</a>
+        <a href="{% url 'delete_task' task.pk %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this task?')">Delete</a>
+      </div>
+    </div>
+  </div>
+  {% empty %}
+  <div class="col-12 text-center">
+    <img src="/static/images/empty-tasks.png" alt="No tasks" style="max-width: 200px;" class="mb-3">
+    <p class="text-muted">You're all caught up! No tasks at the moment.</p>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}
